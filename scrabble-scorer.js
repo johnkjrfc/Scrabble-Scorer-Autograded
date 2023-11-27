@@ -45,7 +45,7 @@ function initialPrompt() {
 
 let simpleScorer = function(word) {
    let simpleScore = 0;          
-   for (let i =0; i < word.length; i++) {
+   for (let i =0; i < word.length; i++) {          //don't need a loop, could return word.length
       simpleScore += 1;
    }
    return simpleScore
@@ -93,12 +93,16 @@ const scoringAlgorithms = [
 ]
 
 function scorerPrompt() {
-   //console.log(scoringAlgorithms[i]);              //give user info on the scoring methods
+   console.log("Which scoring algorithm would you like you use?");              //give user info on the scoring methods
    
    for (let i = 0; i < scoringAlgorithms.length; i++) {      
-      let userAlgorithm = input.question(`Please enter 0 for Simple Score, 1 for Bonus Vowels, or 2 for Scrabble :`); //ask question
-   return scoringAlgorithms[userAlgorithm];
+      algorithm = scoringAlgorithms[i]                                              //loop through scoringAlgorithms,then print name and description at each index
+      console.log(`${i} : ${algorithm.name} : ${algorithm.description}`)
    }
+   let selectedAlgorithm = input.question(`Enter 0, 1, or 2: `);   //ask question
+
+   return scoringAlgorithms[selectedAlgorithm]
+   
 }
 
 function transform(oldPointStructure) {
@@ -122,17 +126,13 @@ function transform(oldPointStructure) {
 
 function runProgram() {
    let word = initialPrompt();
-   // console.log(word);
+
    let score = scrabbleScorer(word);
-   // console.log(score + " Is the old score");
-   //let simpleScore = simpleScorer(word);
-   // console.log(simpleScore + " Is the simple score")
-   //let vowelBonus = vowelBonusScorer(word);
-   //console.log(vowelBonus);
+
    let selectedAlgorithm = scorerPrompt();
-   console.log(`The score for ${word} is : ${selectedAlgorithm.scoringFunction(word)}`)
+   console.log(`The score for ${word} is : ${selectedAlgorithm.scoringFunction(word)}`);
    
-   //console.log(newPointStructure)
+
 
 }
 
